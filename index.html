@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QuizMaster - Fun Quiz App</title>
+    <link rel="stylesheet" href="style.css" id="cssLink" />
+  </head>
+  <body>
+    <!-- Login/Signup Page -->
+    <div id="authPage" class="page active">
+      <div class="auth-container">
+        <div class="auth-header">
+          <h1>🧠 QuizMaster</h1>
+          <p>Test your knowledge with fun quizzes!</p>
+        </div>
+
+        <div class="auth-tabs">
+          <button class="auth-tab active" onclick="showAuthForm('login')">
+            Login
+          </button>
+          <button class="auth-tab" onclick="showAuthForm('signup')">
+            Sign Up
+          </button>
+        </div>
+
+        <!-- Login Form -->
+        <div id="loginForm" class="auth-form active">
+          <h2>Welcome Back!</h2>
+          <form onsubmit="handleLogin(event)">
+            <div class="form-group">
+              <label for="loginEmail">Email</label>
+              <input type="email" id="loginEmail" required />
+            </div>
+            <div class="form-group">
+              <label for="loginPassword">Password</label>
+              <input type="password" id="loginPassword" required />
+            </div>
+            <button type="submit" class="form-button">Login</button>
+          </form>
+        </div>
+
+        <!-- Signup Form -->
+        <div id="signupForm" class="auth-form">
+          <h2>Join QuizMaster!</h2>
+          <form onsubmit="handleSignup(event)">
+            <div class="form-group">
+              <label for="signupName">Full Name</label>
+              <input type="text" id="signupName" required />
+            </div>
+            <div class="form-group">
+              <label for="signupEmail">Email</label>
+              <input type="email" id="signupEmail" required />
+            </div>
+            <div class="form-group">
+              <label for="signupPassword">Password</label>
+              <input type="password" id="signupPassword" required />
+            </div>
+            <button type="submit" class="form-button">Sign Up</button>
+          </form>
+        </div>
+
+        <div class="skip-auth">
+          <button class="skip-button" onclick="skipAuth()">
+            Skip & Play as Guest
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Categories Page -->
+    <div id="categoriesPage" class="page">
+      <div class="categories-container">
+        <div class="categories-header">
+          <h1>Choose Your Quiz Category</h1>
+          <div class="user-info">
+            <span id="userWelcome">Welcome, Guest!</span>
+            <button id="logoutBtn" onclick="logout()" style="display: none">
+              Logout
+            </button>
+          </div>
+        </div>
+
+        <div class="categories-grid">
+          <div class="category-card" data-category="general">
+            <div class="category-icon">🌍</div>
+            <h3>General Knowledge</h3>
+            <p>Test your knowledge on various topics</p>
+          </div>
+
+          <div class="category-card" data-category="science">
+            <div class="category-icon">🔬</div>
+            <h3>Science & Nature</h3>
+            <p>Explore the wonders of science</p>
+          </div>
+
+          <div class="category-card" data-category="history">
+            <div class="category-icon">📚</div>
+            <h3>History</h3>
+            <p>Journey through time and events</p>
+          </div>
+
+          <div class="category-card" data-category="sports">
+            <div class="category-icon">⚽</div>
+            <h3>Sports</h3>
+            <p>Challenge your sports knowledge</p>
+          </div>
+        </div>
+
+        <div class="start-section">
+          <div class="selected-category">
+            <span id="selectedCategoryText">Select a category above</span>
+          </div>
+          <button
+            id="startQuizBtn"
+            class="start-button"
+            onclick="startQuiz()"
+            disabled
+          >
+            Start Quiz
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quiz Page -->
+    <div id="quizPage" class="page">
+      <div class="quiz-container">
+        <div class="quiz-header">
+          <h2 id="quizTitle">Quiz in Progress</h2>
+          <div class="quiz-progress">
+            <div id="progressBar" class="progress-bar"></div>
+          </div>
+          <div class="quiz-info">
+            <span id="questionCounter">Question 1 of 10</span>
+            <span id="scoreDisplay">Score: 0/10</span>
+          </div>
+        </div>
+
+        <div id="loadingScreen" class="loading-screen">
+          <div class="loading-spinner"></div>
+          <p>Loading quiz questions...</p>
+        </div>
+
+        <div
+          id="questionSection"
+          class="question-section"
+          style="display: none"
+        >
+          <div class="question-card">
+            <div class="question-number">
+              <span id="questionNumber">Question 1</span>
+            </div>
+            <div class="question-text">
+              <p id="questionText"></p>
+            </div>
+            <div class="answer-options" id="answerOptions">
+              <!-- Options will be populated by JavaScript -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Results Page -->
+    <div id="resultsPage" class="page">
+      <div class="results-container">
+        <div class="results-header">
+          <h1>🎉 Quiz Complete!</h1>
+        </div>
+
+        <div class="score-display">
+          <div class="final-score">
+            <span id="finalScore">8/10</span>
+          </div>
+          <div class="score-percentage">
+            <span id="scorePercentage">80%</span>
+          </div>
+        </div>
+
+        <div class="results-message">
+          <p id="resultsMessage">Excellent! You really know your stuff!</p>
+        </div>
+
+        <div class="results-actions">
+          <button class="action-button primary" onclick="playAgain()">
+            Play Again
+          </button>
+          <button class="action-button secondary" onclick="goToCategories()">
+            Choose New Category
+          </button>
+          <button class="action-button secondary" onclick="goHome()">
+            Home
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js" id="jsLink"></script>
+  </body>
+</html>
